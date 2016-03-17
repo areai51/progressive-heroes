@@ -5,7 +5,21 @@
 
   <title>Angular 2 QuickStart</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.json">
 
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Progressive Heroes">
+  <meta name="apple-mobile-web-app-title" content="Progressive Heroes">
+  <meta name="theme-color" content="#CFD8DC">
+  <meta name="msapplication-navbutton-color" content="#CFD8DC">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/png" href="homescreen-192">
+  <link rel="apple-touch-icon" type="image/png" href="homescreen-192">
+  <link rel="icon" type="image/png" sizes="144x144" href="homescreen-144">
+  <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="homescreen-144">
+  <meta name="msapplication-starturl" content="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="styles.css">
 
   <!-- 1. Load libraries -->
@@ -30,9 +44,21 @@
           }
         }
       });
-      System.import('app/main')
+      System.import('app/js/main')
             .then(null, console.error.bind(console));
-  </script>
+
+      if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then(function(registration) {
+                console.log("Service Worker Registered");
+          });
+
+        navigator.serviceWorker.ready.then(function(registration) {
+           console.log("Service Worker Ready");
+        });
+      }
+
+</script>
 
 </head>
 
